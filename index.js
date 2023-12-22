@@ -30,12 +30,20 @@ async function run() {
     await client.connect();
 
     const userCollection = client.db("jobsDb").collection("users");
+    const taskCollection = client.db("jobsDb").collection("task");
 
 
      // user related api
      app.post('/users', async(req, res) =>{
       const userData = req.body;
       const result = await userCollection.insertOne(userData);
+      res.send(result)
+    })
+
+     // task related api
+     app.post('/task', async(req, res) =>{
+      const userData = req.body;
+      const result = await taskCollection.insertOne(userData);
       res.send(result)
     })
 
